@@ -7,14 +7,14 @@ const openai = new OpenAI({
 });
 
 export async function POST(req: Request) {
+
 	try {
 		const { userId } = auth();
-        const body = req.json();
+        const body = await req.json();
         const { messages } = body;
 
         if (!userId) {
             return new NextResponse("Unauthorized", { status: 401 })
-
         }
 
         if(!openai.apiKey) {
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
         return NextResponse.json(response.choices[0].message)
 
 	} catch (error) {
-		console.log('[Conversation_Error]', error);
+		console.log('[CONVERSATION_ERROR', error);
 		return new NextResponse('Internal error', { status: 500 });
 	}
 }
