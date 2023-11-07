@@ -1,5 +1,7 @@
 'use client';
 import axios from 'axios';
+import { Empty } from '@/components/Empty';
+import { Loader } from '@/components/Loader';
 import Heading from '@/components/Heading';
 import { MessageSquare } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -12,9 +14,10 @@ import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
+import { cn } from '@/lib/utils';
 
 const ConversationPage = () => {
-	const [ messages, setMessages ] = useState<ChatCompletionMessageParam[]>([]);
+	const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
 	const router = useRouter();
 
@@ -28,27 +31,25 @@ const ConversationPage = () => {
 	const isLoading = form.formState.isLoading;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-
 		try {
 			const userMessage: ChatCompletionMessageParam = {
-				role: "user",
-				content: values.prompt
-			}
+				role: 'user',
+				content: values.prompt,
+			};
 			const newMessages = [...messages, userMessage];
 
 			const response = await axios.post('/api/conversation', {
 				messages: newMessages,
-			})
+			});
 
-			setMessages((current) => [...current, userMessage, response.data])
+			setMessages((current) => [...current, userMessage, response.data]);
 
-			form.reset()
+			form.reset();
 		} catch (error: any) {
 			//Todo: Open Pro Modal
-			console.log(error)
-
+			console.log(error);
 		} finally {
-			router.refresh()
+			router.refresh();
 		}
 	};
 
@@ -94,17 +95,35 @@ const ConversationPage = () => {
 									</FormItem>
 								)}
 							/>
-                            <Button className='col-span-12 lg:col-span-2 w-full' disabled={ isLoading }>Generate</Button>
+							<Button
+								className='col-span-12 lg:col-span-2 w-full'
+								disabled={isLoading}
+							>
+								Generate
+							</Button>
 						</form>
 					</Form>
 				</div>
-                <div className='space-y-4 mt-4'>
-                    <div className='flex flex-col-reverse gap-y-4'>
-						{messages.map((message) => (
-							<div key={message.content}>{message.content}</div>
+				<div className='space-y-4 mt-4'>
+					{isLoading && (
+						<div className='p-8 rounded-lg w-full flex items-center justify-center bg-muted'>
+							<Loader />
+						</div>
+					)}
+					{messages.length === 0 && !isLoading && (
+						<Empty label={'No Conversation Started'} />
+					)}
+					<div className='flex flex-col-reverse gap-y-4'>
+						{messages.map((message, idx) => (
+							<div 
+								key={`${message.content}-${idx}`}
+								className={cn("p-8 w-full flex items-start gap-x-8 rounded-lg", message.role === "user" ? "bg-white border border-black/10" : "bg-muted")}
+							>
+								{message.content}
+							</div>
 						))}
 					</div>
-                </div>
+				</div>
 			</div>
 		</div>
 	);
