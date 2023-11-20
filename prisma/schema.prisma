@@ -1,3 +1,5 @@
+// Need to push changes to db for it to work
+
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
@@ -6,4 +8,13 @@ datasource db {
 
 generator client {
   provider = "prisma-client-js"
+}
+
+model UserApiLimit {
+  id String @id @default(cuid())
+  userId String @unique
+  count Int @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
 }
