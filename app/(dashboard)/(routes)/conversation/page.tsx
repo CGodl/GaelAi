@@ -17,11 +17,13 @@ import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/UserAvatar';
 import { BotAvatar } from '@/components/BotAvatar';
+import useProModal from '@/hooks/useProModal';
 
 const ConversationPage = () => {
 	const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
 
 	const router = useRouter();
+	const proModal = useProModal();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -48,8 +50,9 @@ const ConversationPage = () => {
 
 			form.reset();
 		} catch (error: any) {
-			//Todo: Open Pro Modal
-			console.log(error);
+			if (error?.response?.status === 403) {
+				proModal.onOpen()
+			}
 		} finally {
 			router.refresh();
 		}
