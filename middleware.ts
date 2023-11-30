@@ -7,7 +7,7 @@ import { NextResponse } from 'next/server';
 // See https://clerk.com/docs/references/nextjs/auth-middleware for more information about configuring your middleware
 
 export default authMiddleware({
-	publicRoutes: ['/'],
+	publicRoutes: ['/', "/api/webhook"],
 	afterAuth(auth, req, evt) {
 
         //redirect logged in users away from the landing page
