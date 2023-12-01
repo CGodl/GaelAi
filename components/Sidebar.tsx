@@ -8,7 +8,6 @@ import { cn } from "@/lib/utils";
 import { LayoutDashboard, MessageSquare, ImageIcon, VideoIcon, Music, Settings, Code } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { FreeCounter } from '@/components/FreeCounter';
-//import FreeCounter from 
 
 const routes = [
     {
@@ -51,7 +50,7 @@ const routes = [
         label: "Settings",
         icon: Settings,
         href: "/settings",
-        color: "text-emerald-500"
+        color: "text-gray-500"
     },
 ]
 
@@ -59,9 +58,10 @@ const montserrat = Montserrat({ weight: "600", subsets: ["latin"] });
 
 interface SidebarProps {
     apiLimitCount: number
+    isPro: boolean
 }
 
-const Sidebar = ({apiLimitCount = 0}: SidebarProps) => {
+const Sidebar = ({apiLimitCount = 0, isPro}: SidebarProps) => {
     const pathname = usePathname()
 
 	return (
@@ -91,7 +91,7 @@ const Sidebar = ({apiLimitCount = 0}: SidebarProps) => {
 
                 </div>
 			</div>
-            <FreeCounter apiLimitCount={apiLimitCount} />
+            <FreeCounter apiLimitCount={apiLimitCount} isPro={isPro} />
 		</div>
 	);
 };
