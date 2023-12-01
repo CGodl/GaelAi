@@ -24,17 +24,16 @@ export const ProModal = () => {
 
 	const onSubscribe = async () => {
 		try {
-			setLoading(false)
-			const response = await axios.get("/api/stripe");
+			setLoading(false);
+			const response = await axios.get('/api/stripe');
 
 			window.location.href = response.data.url;
-
 		} catch (error) {
-			console.log(error, "STRIPE_CLIENT_ERROR")
+			console.log(error, 'STRIPE_CLIENT_ERROR');
 		} finally {
-			setLoading(false)
+			setLoading(false);
 		}
-	}
+	};
 
 	return (
 		<Dialog open={proModal.isOpen} onOpenChange={proModal.onClose}>
@@ -67,11 +66,12 @@ export const ProModal = () => {
 				</DialogHeader>
 				<DialogFooter>
 					<Button
-					onClick={onSubscribe}
-                        size='lg'
-                        variant='premium'
-                        className='w-full'
-                    >
+						disabled={loading}
+						onClick={onSubscribe}
+						size='lg'
+						variant='premium'
+						className='w-full'
+					>
 						Upgrade <Zap className='w-4 h-4 ml-2 fill-white' />
 					</Button>
 				</DialogFooter>
