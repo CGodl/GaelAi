@@ -1,5 +1,6 @@
 'use client';
 import axios from 'axios';
+import { toast } from 'react-hot-toast';
 import { Empty } from '@/components/Empty';
 import { Loader } from '@/components/Loader';
 import Heading from '@/components/Heading';
@@ -42,6 +43,8 @@ const MusicPage = () => {
 		} catch (error: any) {
 			if (error?.response?.status === 403) {
 				proModal.onOpen()
+			} else {
+				toast.error("Something went wrong");
 			}
 		} finally {
 			router.refresh();
