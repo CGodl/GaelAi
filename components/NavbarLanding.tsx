@@ -17,7 +17,7 @@ export const NavbarLanding = () => {
 
 	return (
 		<nav className='p-4 bg-transparent flex items-center justify-between z-[10]'>
-			<Link href='/' className='flex items-center'>
+			<Link href='/' className='flex items-center z-[10]'>
 				<div className='relative h-8 w-8 mr-4'>
                     <Image 
                         fill
@@ -29,7 +29,7 @@ export const NavbarLanding = () => {
                     GealAI
                 </h1>
 			</Link>
-			<div className='flex items-center gap-x-2'>
+			<div className='flex items-center gap-x-2 z-[10]'>
                 <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
                     <Button variant='outline' className='rounded-full'>
                         Get Started
