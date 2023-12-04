@@ -9,8 +9,8 @@ import { CrispProvider } from '@/components/CrispProvider';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-	title: 'EvokeAI',
-	description: 'AI Design Platform',
+	title: 'GealAi',
+	description: 'One Stop AI Shop',
 };
 
 export default function RootLayout({
