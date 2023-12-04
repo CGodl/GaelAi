@@ -7,9 +7,9 @@ import { ParticleConstellation } from "@/components/ParticleConstellation";
 export default function LandingPage() {
 	return (
 		<div className="h-full">
-			<ParticleConstellation />
 			<NavbarLanding />
 			<HeroLanding />
+			<ParticleConstellation />
 
 		</div>
 		

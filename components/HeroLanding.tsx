@@ -6,16 +6,12 @@ import Link from 'next/link';
 import TypewriterComponent from 'typewriter-effect';
 import { Button } from './ui/button';
 
-import { ParticleConstellation } from './ParticleConstellation';
-
-
 export const HeroLanding = () => {
 	const { isSignedIn } = useAuth();
 
 	return (
 		<>
-        	<ParticleConstellation />
-
+    
 			<div className='relative text-white font-bold py-36 text-center space-y-5 z-[10]'>
 				<div className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl space-y-5 font-extrabold '>
 					<h1>The AI tool for generating</h1>
