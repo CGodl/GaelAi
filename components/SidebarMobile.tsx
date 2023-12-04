@@ -16,11 +16,9 @@ const SidebarMobile = ({ apiLimitCount, isPro}: SidebarMobileProps) => {
 
     useEffect(() => {
         setIsMounted(true)
-
     }, []);
 
     if (!isMounted) return null;
-	if (isPro) return null;
 
 	return (
 		<Sheet >
