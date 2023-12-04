@@ -1,16 +1,23 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
 import { Engine } from "tsparticles-engine";
 
 export const ParticleConstellation = () => {
+    const [loading, setIsLoading] = useState(true);
     const particlesInit = useCallback(async (engine: Engine) => {
         await loadFull(engine);
     }, []);
 
     const particlesLoaded = useCallback(async (container: any) => {
-        console.log(container);
+        await console.log(container);
     }, []);
+
+    useEffect(() => {
+        setIsLoading(false)
+    }, [])
+
+    if (loading) return null
 
     return (
         <Particles
