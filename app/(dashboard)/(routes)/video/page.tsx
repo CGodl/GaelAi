@@ -54,7 +54,7 @@ const VideoPage = () => {
 
 	return (
 		<div>
-			<Heading
+			{/* <Heading
 				title='Video Generation'
 				description='Turn your prompt into videos'
 				Icon={VideoIcon}
@@ -118,7 +118,7 @@ const VideoPage = () => {
 						</video>
 					)}
 				</div>
-			</div>
+			</div> */}
 		</div>
 	);
 };
