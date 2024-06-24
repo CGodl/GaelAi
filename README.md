@@ -1,6 +1,6 @@
 # GeaiAI
 
-GealAI is a project developed to allows users all-in-one access to various AI features from OpenAI and Replicate AI including text, conversation, image generation, and video generation.
+GealAI is a project developed to allow users all-in-one access to various AI features from OpenAI and Replicate AI including text, conversation, image generation, and video generation.
 
 
 
