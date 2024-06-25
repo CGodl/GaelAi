@@ -1,8 +1,10 @@
 // Need to push changes to db for it to work
+//Then run generate if successful
 
 datasource db {
-  provider     = "mysql"
+  provider     = "postgresql"
   url          = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
   relationMode = "prisma"
 }
 
