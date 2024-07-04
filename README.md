@@ -146,7 +146,7 @@ To get a local copy up and running follow these simple example steps.
 
 ## Running Application
 
-To run the development server::
+To run the development server:
 
 ```bash
 npm run dev
