@@ -91,6 +91,7 @@
 * [![Next][Next.js]][Next-url]
 * [![React][React.js]][React-url]
 * [![TailwindCss][Tailwindscss.com]][TailwindCss-url]
+* [![OpenAI][OpenAi.com]][OpenAI-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -241,6 +242,8 @@ Project Link: [https://github.com/CGodl/GealAi](https://github.com/CGodl/GealAi)
 [Svelte-url]: https://svelte.dev/
 [Tailwindscss.com]: https://img.shields.io/badge/tailwindcss-0F172A?style=for-the-badge&logo=tailwindcss
 [TailwindCss-url]: https://tailwindcss.com/
+[OpenAI.com]: https://img.shields.io/badge/-OpenAI-412991?style=for-the-badge&logo=openai&logoColor=white
+[OpenAI-url]: https://openai.com/
 
 
 
