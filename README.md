@@ -120,7 +120,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm install
    ```
-4. Create a `.env` file in the root of the directory
+4. Create a `.env` file in the root directory
 
 5. Enter the following API variables and associated keys in `.env`
    ```js
