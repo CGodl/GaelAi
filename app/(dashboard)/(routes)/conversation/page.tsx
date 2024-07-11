@@ -22,8 +22,35 @@ import useProModal from '@/hooks/useProModal';
 
 import { SpinnerWithText } from '@/components/ui/spinner';
 
+const testConvoARR = [
+	{
+	  "role": "user",
+	  "content": "This is my first question asked"
+	},
+	{
+	  "role": "assistant",
+	  "content": "Great! This is first response?"
+	},
+	{
+	  "role": "user",
+	  "content": "This is my second question asked"
+	},
+	{
+	  "role": "assistant",
+	  "content": "This is second response!"
+	},
+	{
+	  "role": "user",
+	  "content": "This is my third question asked Respond with the word three"
+	},
+	{
+	  "role": "assistant",
+	  "content": "three"
+	}
+  ]
+
 const ConversationPage = () => {
-	const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
+	const [messages, setMessages] = useState<ChatCompletionMessageParam[]>(testConvoARR);
 
 	const router = useRouter();
 	const proModal = useProModal();
@@ -56,7 +83,7 @@ const ConversationPage = () => {
 			if (error?.response?.status === 403) {
 				proModal.onOpen();
 			} else {
-				toast.error("Something went wrong");
+				toast.error('Something went wrong');
 			}
 		} finally {
 			router.refresh();
@@ -123,21 +150,24 @@ const ConversationPage = () => {
 					{messages.length === 0 && !isResponseLoading && (
 						<Empty label={'No Conversation Started'} />
 					)}
-					<div className='flex flex-col-reverse gap-y-4'>
-						{messages.map((message, idx) => (
-							<div
-								key={`${message.content}-${idx}`}
-								className={cn(
-									'p-8 w-full flex items-start gap-x-8 rounded-lg',
-									message.role === 'user'
-										? 'bg-white border border-black/10'
-										: 'bg-muted'
-								)}
-							>
-								{message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
-								<p className='text-sm'>{message.content}</p>
-							</div>
-						))}
+					<div className='flex flex-col gap-y-4'>
+						{messages.map((message, idx) => {
+
+							return (
+								<div
+									key={`${message.content}-${idx}`}
+									className={cn(
+										'p-8 w-full flex items-start gap-x-8 rounded-lg',
+										message.role === 'user'
+											? 'bg-white border border-black/10 bg-blue-500 text-white rounded-lg p-2 shadow mr-2 max-w-sm'
+											: 'bg-muted'
+									)}
+								>
+									{message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
+									<p className='text-sm'>{message.content}</p>
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			</div>
