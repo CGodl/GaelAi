@@ -22,35 +22,11 @@ import useProModal from '@/hooks/useProModal';
 
 import { SpinnerWithText } from '@/components/ui/spinner';
 
-const testConvoARR = [
-	{
-	  "role": "user",
-	  "content": "This is my first question asked"
-	},
-	{
-	  "role": "assistant",
-	  "content": "Great! This is first response?"
-	},
-	{
-	  "role": "user",
-	  "content": "This is my second question asked"
-	},
-	{
-	  "role": "assistant",
-	  "content": "This is second response!"
-	},
-	{
-	  "role": "user",
-	  "content": "This is my third question asked Respond with the word three"
-	},
-	{
-	  "role": "assistant",
-	  "content": "three"
-	}
-  ]
+
 
 const ConversationPage = () => {
-	const [messages, setMessages] = useState<ChatCompletionMessageParam[]>(testConvoARR);
+	const [messages, setMessages] =
+		useState<ChatCompletionMessageParam[]>([]);
 
 	const router = useRouter();
 	const proModal = useProModal();
@@ -94,7 +70,7 @@ const ConversationPage = () => {
 		<div>
 			<Heading
 				title='Conversation'
-				description='Our most advanced conversation model.'
+				description='Our most advanced conversation model. Note: Prompting conversations based on real people, including celebrities, will result in an error!'
 				Icon={MessageSquare}
 				iconColor='text-violet-500'
 				bgColor='bg-violet-500/10'
@@ -141,33 +117,32 @@ const ConversationPage = () => {
 						</form>
 					</Form>
 				</div>
-				<div className='space-y-4 mt-4'>
-					{isResponseLoading && (
-						<div className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
-							<SpinnerWithText />
-						</div>
-					)}
+				<div className='space-y-4 mt-4 pb-12'>
 					{messages.length === 0 && !isResponseLoading && (
 						<Empty label={'No Conversation Started'} />
 					)}
 					<div className='flex flex-col gap-y-4'>
 						{messages.map((message, idx) => {
-
 							return (
 								<div
 									key={`${message.content}-${idx}`}
 									className={cn(
-										'p-8 w-full flex items-start gap-x-8 rounded-lg',
+										'p-2 w-full flex items-start gap-x-8 rounded-lg max-w-sm items-center',
 										message.role === 'user'
-											? 'bg-white border border-black/10 bg-blue-500 text-white rounded-lg p-2 shadow mr-2 max-w-sm'
+											? 'bg-primary border border-black/10 text-white rounded-lg shadow mr-2 flex flex-row-reverse  ml-auto'
 											: 'bg-muted'
 									)}
 								>
 									{message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
-									<p className='text-sm'>{message.content}</p>
+									<p className='text-sm '>{message.content}</p>
 								</div>
 							);
 						})}
+						{isResponseLoading && (
+							<div className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
+								<SpinnerWithText />
+							</div>
+						)}
 					</div>
 				</div>
 			</div>

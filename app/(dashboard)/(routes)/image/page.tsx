@@ -70,7 +70,7 @@ const ImagePage = () => {
 		<div>
 			<Heading
 				title='Image Generation'
-				description='Prompts to image made easy'
+				description='Prompts to image made easy. Note: Prompting images based on real people, including celebrities, will result in an error!'
 				Icon={ImageIcon}
 				iconColor='text-pink-700'
 				bgColor='bg-pink-700/10'
