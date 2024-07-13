@@ -44,7 +44,7 @@ export const TOOLS = [
 
 // Constants for Testing
 
-const MESSEGESDUMMYDATAARR = [
+export const MESSEGESDUMMYDATAARR = [
 	{
 		role: 'user',
 		content: 'This is my first question asked',
@@ -102,3 +102,22 @@ const MESSEGESDUMMYDATAARR = [
 		content: '7',
 	},
 ];
+
+export const CODEDUMMYDATAARR = [
+	{
+	  "role": "user",
+	  "content": "React Dashboard page"
+	},
+	{
+	  "role": "assistant",
+	  "content": "```html\n<div>\n  <h1>React Dashboard Page</h1>\n  <!-- Add your dashboard components here -->\n</div>\n```"
+	},
+	{
+	  "role": "user",
+	  "content": "A react card component with a title section ,text section with border"
+	},
+	{
+	  "role": "assistant",
+	  "content": "```jsx\nimport React from 'react';\n\nconst Card = () => {\n  return (\n    <div style={{ border: '1px solid black', padding: '10px' }}>\n      <h2>Title</h2>\n      <p>Text section</p>\n    </div>\n  );\n};\n\nexport default Card;\n```"
+	}
+  ]
