@@ -19,7 +19,6 @@ import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/UserAvatar';
 import { BotAvatar } from '@/components/BotAvatar';
 import useProModal from '@/hooks/useProModal';
-
 import { SpinnerWithText } from '@/components/ui/spinner';
 
 

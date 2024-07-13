@@ -20,6 +20,7 @@ import { UserAvatar } from '@/components/UserAvatar';
 import { BotAvatar } from '@/components/BotAvatar';
 import ReactMarkdown from 'react-markdown';
 import useProModal from '@/hooks/useProModal';
+import { SpinnerWithText } from '@/components/ui/spinner';
 
 const CodePage = () => {
 	const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
@@ -53,9 +54,9 @@ const CodePage = () => {
 			form.reset();
 		} catch (error: any) {
 			if (error?.response?.status === 403) {
-				proModal.onOpen()
+				proModal.onOpen();
 			} else {
-				toast.error("Something went wrong");
+				toast.error('Something went wrong');
 			}
 		} finally {
 			router.refresh();
@@ -113,46 +114,44 @@ const CodePage = () => {
 						</form>
 					</Form>
 				</div>
-				<div className='space-y-4 mt-4'>
-					{isResponseLoading && (
-						<div className='p-8 rounded-lg w-full flex items-center justify-center bg-muted'>
-							<Loader />
-						</div>
-					)}
+				<div className='space-y-4 mt-4 pb-12'>
 					{messages.length === 0 && !isResponseLoading && (
 						<Empty label={'No Conversation Started'} />
 					)}
-					<div className='flex flex-col-reverse gap-y-4'>
+					<div className='flex flex-col gap-y-4'>
 						{messages.map((message, idx) => (
 							<div
 								key={`${message.content}-${idx}`}
 								className={cn(
-									'p-8 w-full flex items-start gap-x-8 rounded-lg',
+									'p-2 w-full flex items-start gap-x-8 rounded-lg items-center',
 									message.role === 'user'
-										? 'bg-white border border-black/10'
+										? 'bg-primary border border-black/10 text-white rounded-lg shadow mr-2 flex flex-row-reverse  ml-auto max-w-sm'
 										: 'bg-muted'
 								)}
 							>
 								{message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
-								<ReactMarkdown 
-								components={{
-									pre: ({ node, ...props}) => (
-										<div className='overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg'>
-											<pre {...props} />
-
-										</div>
-									),
-									code: ({ node, ...props}) => (
-										<code className='bg-black/10 rounded-lg p-1' {...props}/>
-									)
-								
-								}}
-								className='text-sm overflow-hidden leading-7'
+								<ReactMarkdown
+									components={{
+										pre: ({ node, ...props }) => (
+											<div className='overflow-auto w-full my-2 bg-black/10 p-2 rounded-lg'>
+												<pre {...props} />
+											</div>
+										),
+										code: ({ node, ...props }) => (
+											<code className='bg-black/10 rounded-lg p-1' {...props} />
+										),
+									}}
+									className='text-sm overflow-hidden leading-7'
 								>
-									{message.content || ""}
+									{message.content || ''}
 								</ReactMarkdown>
 							</div>
 						))}
+						{isResponseLoading && (
+							<div className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
+								<SpinnerWithText />
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
