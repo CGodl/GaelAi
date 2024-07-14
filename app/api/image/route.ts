@@ -52,7 +52,7 @@ export async function POST(req: Request) {
 
         if (!isPro) await increaseApiLimit();
 
-        return NextResponse.json(response.data)
+        return Response.json(response.data)
 
 	} catch (error) {
 		console.log('[IMAGE_ERROR', error);

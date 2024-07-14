@@ -39,3 +39,85 @@ export const TOOLS = [
 		href: '/code'
 	}
 ]
+
+
+
+// Constants for Testing
+
+export const MESSEGESDUMMYDATAARR = [
+	{
+		role: 'user',
+		content: 'This is my first question asked',
+	},
+	{
+		role: 'assistant',
+		content: 'Great! This is first response?',
+	},
+	{
+		role: 'user',
+		content: 'This is my second question asked',
+	},
+	{
+		role: 'assistant',
+		content: 'This is second response!',
+	},
+	{
+		role: 'user',
+		content: 'This is my third question asked Respond with the word three',
+	},
+	{
+		role: 'assistant',
+		content: 'three',
+	},
+	{
+		role: 'user',
+		content: 'This is my 4 question asked Respond with the word three',
+	},
+	{
+		role: 'assistant',
+		content: '4',
+	},
+	{
+		role: 'user',
+		content: 'This is my 5 question asked Respond with the word three',
+	},
+	{
+		role: 'assistant',
+		content: '5',
+	},
+	{
+		role: 'user',
+		content: 'This is my 6 question asked Respond with the word three',
+	},
+	{
+		role: 'assistant',
+		content: '6',
+	},
+	{
+		role: 'user',
+		content: 'This is my 7 question asked Respond with the word three',
+	},
+	{
+		role: 'assistant',
+		content: '7',
+	},
+];
+
+export const CODEDUMMYDATAARR = [
+	{
+	  "role": "user",
+	  "content": "React Dashboard page"
+	},
+	{
+	  "role": "assistant",
+	  "content": "```html\n<div>\n  <h1>React Dashboard Page</h1>\n  <!-- Add your dashboard components here -->\n</div>\n```"
+	},
+	{
+	  "role": "user",
+	  "content": "A react card component with a title section ,text section with border"
+	},
+	{
+	  "role": "assistant",
+	  "content": "```jsx\nimport React from 'react';\n\nconst Card = () => {\n  return (\n    <div style={{ border: '1px solid black', padding: '10px' }}>\n      <h2>Title</h2>\n      <p>Text section</p>\n    </div>\n  );\n};\n\nexport default Card;\n```"
+	}
+  ]

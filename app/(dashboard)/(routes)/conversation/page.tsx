@@ -13,17 +13,19 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/UserAvatar';
 import { BotAvatar } from '@/components/BotAvatar';
 import useProModal from '@/hooks/useProModal';
-
 import { SpinnerWithText } from '@/components/ui/spinner';
 
+
+
 const ConversationPage = () => {
-	const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
+	const [messages, setMessages] =
+		useState<ChatCompletionMessageParam[]>([]);
 
 	const router = useRouter();
 	const proModal = useProModal();
@@ -37,7 +39,14 @@ const ConversationPage = () => {
 
 	const isResponseLoading = form.formState.isSubmitting;
 
+	const loadingDiv = useRef<HTMLInputElement | null>(null);
+	const scrollOnLoading = () => {
+		loadingDiv.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+	  };
+
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		scrollOnLoading()
+
 		try {
 			const userMessage: ChatCompletionMessageParam = {
 				role: 'user',
@@ -56,7 +65,7 @@ const ConversationPage = () => {
 			if (error?.response?.status === 403) {
 				proModal.onOpen();
 			} else {
-				toast.error("Something went wrong");
+				toast.error('Something went wrong');
 			}
 		} finally {
 			router.refresh();
@@ -67,7 +76,7 @@ const ConversationPage = () => {
 		<div>
 			<Heading
 				title='Conversation'
-				description='Our most advanced conversation model.'
+				description='Our most advanced conversation model. Note: Prompting conversations based on real people, including celebrities, will result in an error!'
 				Icon={MessageSquare}
 				iconColor='text-violet-500'
 				bgColor='bg-violet-500/10'
@@ -114,30 +123,32 @@ const ConversationPage = () => {
 						</form>
 					</Form>
 				</div>
-				<div className='space-y-4 mt-4'>
-					{isResponseLoading && (
-						<div className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
-							<SpinnerWithText />
-						</div>
-					)}
+				<div className='space-y-4 mt-4 pb-12'>
 					{messages.length === 0 && !isResponseLoading && (
 						<Empty label={'No Conversation Started'} />
 					)}
-					<div className='flex flex-col-reverse gap-y-4'>
-						{messages.map((message, idx) => (
-							<div
-								key={`${message.content}-${idx}`}
-								className={cn(
-									'p-8 w-full flex items-start gap-x-8 rounded-lg',
-									message.role === 'user'
-										? 'bg-white border border-black/10'
-										: 'bg-muted'
-								)}
-							>
-								{message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
-								<p className='text-sm'>{message.content}</p>
+					<div className='flex flex-col gap-y-4'>
+						{messages.map((message, idx) => {
+							return (
+								<div
+									key={`${message.content}-${idx}`}
+									className={cn(
+										'p-2 w-full flex items-start gap-x-8 rounded-lg max-w-sm items-center',
+										message.role === 'user'
+											? 'bg-primary border border-black/10 text-white rounded-lg shadow mr-2 flex flex-row-reverse  ml-auto'
+											: 'bg-muted'
+									)}
+								>
+									{message.role === 'user' ? <UserAvatar /> : <BotAvatar />}
+									<p className='text-sm '>{message.content}</p>
+								</div>
+							);
+						})}
+						{isResponseLoading && (
+							<div ref={loadingDiv} className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
+								<SpinnerWithText />
 							</div>
-						))}
+						)}
 					</div>
 				</div>
 			</div>
