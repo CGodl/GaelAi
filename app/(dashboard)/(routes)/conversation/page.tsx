@@ -13,13 +13,14 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/UserAvatar';
 import { BotAvatar } from '@/components/BotAvatar';
 import useProModal from '@/hooks/useProModal';
 import { SpinnerWithText } from '@/components/ui/spinner';
+import { MESSEGESDUMMYDATAARR } from '@/constants';
 
 
 
@@ -39,7 +40,14 @@ const ConversationPage = () => {
 
 	const isResponseLoading = form.formState.isSubmitting;
 
+	const loadingDiv = useRef<HTMLInputElement | null>(null);
+	const scrollOnLoading = () => {
+		loadingDiv.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+	  };
+
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		scrollOnLoading()
+
 		try {
 			const userMessage: ChatCompletionMessageParam = {
 				role: 'user',
@@ -138,7 +146,7 @@ const ConversationPage = () => {
 							);
 						})}
 						{isResponseLoading && (
-							<div className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
+							<div ref={loadingDiv} className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
 								<SpinnerWithText />
 							</div>
 						)}

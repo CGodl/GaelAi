@@ -2,7 +2,6 @@
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Empty } from '@/components/Empty';
-import { Loader } from '@/components/Loader';
 import Heading from '@/components/Heading';
 import { Code } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -13,7 +12,7 @@ import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { ChatCompletionMessageParam } from 'openai/resources/index.mjs';
 import { cn } from '@/lib/utils';
 import { UserAvatar } from '@/components/UserAvatar';
@@ -37,7 +36,14 @@ const CodePage = () => {
 
 	const isResponseLoading = form.formState.isSubmitting;
 
+	const loadingDiv = useRef<HTMLInputElement | null>(null);
+	const scrollOnLoading = () => {
+		loadingDiv.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+	  };
+
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
+		scrollOnLoading()
+
 		try {
 			const userMessage: ChatCompletionMessageParam = {
 				role: 'user',
@@ -148,7 +154,7 @@ const CodePage = () => {
 							</div>
 						))}
 						{isResponseLoading && (
-							<div className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
+							<div ref={loadingDiv} className='p-4 rounded-lg w-full flex items-center justify-center bg-muted'>
 								<SpinnerWithText />
 							</div>
 						)}
