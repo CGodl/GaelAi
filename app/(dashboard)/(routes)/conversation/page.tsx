@@ -20,13 +20,12 @@ import { UserAvatar } from '@/components/UserAvatar';
 import { BotAvatar } from '@/components/BotAvatar';
 import useProModal from '@/hooks/useProModal';
 import { SpinnerWithText } from '@/components/ui/spinner';
-import { MESSEGESDUMMYDATAARR } from '@/constants';
 
 
 
 const ConversationPage = () => {
 	const [messages, setMessages] =
-		useState<ChatCompletionMessageParam[]>([]);
+		useState<ChatCompletionMessageParam[]>();
 
 	const router = useRouter();
 	const proModal = useProModal();
