@@ -25,7 +25,7 @@ import { SpinnerWithText } from '@/components/ui/spinner';
 
 const ConversationPage = () => {
 	const [messages, setMessages] =
-		useState<ChatCompletionMessageParam[]>();
+		useState<ChatCompletionMessageParam[]>([]);
 
 	const router = useRouter();
 	const proModal = useProModal();
